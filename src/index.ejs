@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% if (!htmlWebpackPlugin.options.cordova) { %>
+        <base href="/">
+        <% } else if (htmlWebpackPlugin.options.platform == 'ios') { %>
+        <% } else { %>
+        <base href="file:///android_asset/www/">
+        <% } %>
+
+        <title>ExApp</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">  
+    </head>
+    <body>
+        <ex-app>
+            Loading...
+        </ex-app>
+
+        <% if (htmlWebpackPlugin.options.cordova) { %>
+        <script src="cordova.js"></script>
+        <% } %>
+    </body>
+</html>

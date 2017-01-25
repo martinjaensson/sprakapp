@@ -1,6 +1,5 @@
 import { NgModule, NgModuleFactoryLoader } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 

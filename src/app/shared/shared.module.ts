@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-// import { COMPONENTS } from './components';
-// import { DIRECTIVES } from './directives';
-// import { PIPES } from './pipes';
+import { COMPONENTS } from './components';
+import { DIRECTIVES } from './directives';
+import { PIPES } from './pipes';
 
 import { 
     MaterialModule,
@@ -47,6 +47,10 @@ export const SHARED_MATERIAL_COMPONENTS_ROOT: any[] = [];
 for (let i = 0; i < SHARED_MATERIAL_COMPONENTS.length; i ++)
     SHARED_MATERIAL_COMPONENTS_ROOT.push(SHARED_MATERIAL_COMPONENTS[i].forRoot());
 
+/**
+ * Contains all shared stuff for the application. This module
+ * should be imported in all other app modules.
+ */
 @NgModule({
     imports: [
         CommonModule,
@@ -62,14 +66,14 @@ for (let i = 0; i < SHARED_MATERIAL_COMPONENTS.length; i ++)
 
         ...SHARED_MATERIAL_COMPONENTS,
 
-        // ...COMPONENTS,
-        // ...DIRECTIVES,
-        // ...PIPES
+        ...COMPONENTS,
+        ...DIRECTIVES,
+        ...PIPES
     ],
     declarations: [
-        // ...COMPONENTS,
-        // ...DIRECTIVES,
-        // ...PIPES,
+        ...COMPONENTS,
+        ...DIRECTIVES,
+        ...PIPES,
     ]
 })
 export class SharedModule {

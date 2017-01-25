@@ -4,13 +4,17 @@ import { HttpModule } from '@angular/http';
 import { GUARDS } from './guards';
 import { SERVICES } from './services';
 import { RESOURCES } from './resources';
-// import { STATE, STATE_EFFECTS } from './state';
+import { Store, EFFECTS } from './state';
 
+/**
+ * Contains all core functionality of the application.
+ * Imported by the root module.
+ */
 @NgModule({
     imports: [
         HttpModule,
         
-        // ...STATE_EFFECTS
+        ...EFFECTS
     ],
     exports: [],
     declarations: [],
@@ -21,10 +25,11 @@ export class CoreModule {
         return {
             ngModule: CoreModule,
             providers: [
+                Store,
+                
                 ...GUARDS,
                 ...SERVICES,
                 ...RESOURCES,
-                // ...STATE,
             ]
         };
     }

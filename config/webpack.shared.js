@@ -88,6 +88,10 @@ module.exports = {
             {
                 from: 'src/assets/fonts',
                 to: 'assets/fonts'
+            },
+            {
+                from: 'node_modules/material-design-icons/iconfont',
+                to: 'assets/fonts'
             }
         ]),
         

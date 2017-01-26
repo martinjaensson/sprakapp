@@ -4,21 +4,6 @@
  * These exports should follow the interface placed in src/config.ts.
  */
 
-var api = {
-    prod: {
-        url: 'https://crmapi.imatech.com',
-        tokenName: 'app-token'
-    },
-    dev: {
-        url: 'https://crmapi.imatech.com',
-        tokenName: 'app-token'
-    },
-    local: {
-        url: 'http://localhost:61665',
-        tokenName: 'app-token'
-    }
-};
-
 var common = {
     version: '0.1.0',
     api: {

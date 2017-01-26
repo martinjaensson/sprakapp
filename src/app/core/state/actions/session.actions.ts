@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 
 import { type } from '../utils';
 
-import { User } from '../../models';
+import { User, LoginRequest } from '../../models';
 
 export const ActionTypes = {
     INITIALIZE:                 type('[Session] INITIALIZE'),
@@ -54,7 +54,7 @@ export class Set implements Action {
 export class Login implements Action {
     type = ActionTypes.LOGIN;
 
-    constructor(public payload: any) {}
+    constructor(public payload: LoginRequest) {}
 }
 
 export class LoginSuccess implements Action {
@@ -63,8 +63,6 @@ export class LoginSuccess implements Action {
 
 export class LoginError implements Action {
     type = ActionTypes.LOGIN_ERROR;
-
-    constructor(public payload: string) {}
 }
 
 /**

@@ -1,10 +1,14 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
+import { SharedModule } from '../shared';
+import { ErrorModule } from '../error';
+
 import { GUARDS } from './guards';
 import { SERVICES } from './services';
 import { RESOURCES } from './resources';
 import { Store, EFFECTS } from './state';
+import { HTTP } from './utils';
 
 /**
  * Contains all core functionality of the application.
@@ -12,6 +16,9 @@ import { Store, EFFECTS } from './state';
  */
 @NgModule({
     imports: [
+        SharedModule,
+        ErrorModule,
+        
         HttpModule,
         
         ...EFFECTS
@@ -30,6 +37,7 @@ export class CoreModule {
                 ...GUARDS,
                 ...SERVICES,
                 ...RESOURCES,
+                ...HTTP
             ]
         };
     }

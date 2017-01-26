@@ -12,19 +12,19 @@ var common = {
 };
 
 module.exports = {
-    local: Object.assign(common, {
+    local: Object.assign({}, common, {
         production: false,
         api: {
-            url: 'http://localhost:61665'
+            url: 'http://localhost:49887'
         }
     }),
-    dev: Object.assign(common, {
+    dev: Object.assign({}, common, {
         production: false
     }),
-    test: Object.assign(common, {
+    test: Object.assign({}, common, {
         production: true
     }),
-    prod: Object.assign(common, {
+    prod: Object.assign({}, common, {
         production: true
     }),
 };

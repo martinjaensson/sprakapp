@@ -5,5 +5,7 @@ export interface SessionState {
     initialized: boolean;
 
     user: User;
+
+    loginError: string;
     
 }

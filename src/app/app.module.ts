@@ -51,7 +51,7 @@ function _getConditionalProviders() {
  */
 function _getConditionalImports() {
     let imports = [];
-
+    
     if (!CONFIG.production)
         imports.push(StoreDevtoolsModule.instrumentOnlyWithExtension());
 

@@ -1,7 +1,9 @@
-import { SessionState } from './';
+import { SessionState, ErrorState } from './';
 
 export interface AppState {
     
-    session: SessionState,
+    session: SessionState;
+
+    error: ErrorState;
     
 }

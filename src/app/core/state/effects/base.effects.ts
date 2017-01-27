@@ -12,6 +12,29 @@ import * as errorActions from '../actions/error.actions';
  */
 export class BaseEffects {
 
+    private _handledErrors: { [key: number ]: { handling: 'page' | 'dialog' | 'logout' | 'custom', title: string, message: string } } = {
+        0: {
+            handling: 'page',
+            title: "Servern går ej att nå",
+            message: "Kontrollera att du är ansluten till Internet. Om problemet kvarstår, kontakta administratör."
+        },
+        401: {
+            handling: 'logout',
+            title: "",
+            message: ""
+        },
+        404: {
+            handling: 'logout',
+            title: "",
+            message: ""
+        },
+        500: {
+            handling: 'dialog',
+            title: "Ett fel inträffade på servern",
+            message: "Om problemet kvarstår, kontakta administratör"
+        }
+    };
+
     constructor() { }
 
     /**
@@ -19,6 +42,8 @@ export class BaseEffects {
      */
     handleError(specificErrorAction: Action): (err: any, caught: Observable<any>) => Observable<Action> {
         return (e: any, caught: Observable<any>) => {
+
+            console.error(e);
 
             // Cast to ApiError
             let err: ApiError = <ApiError>e;
@@ -30,19 +55,17 @@ export class BaseEffects {
             // Map to handling action
             let errorAction: Action;
 
-            if (err.status == 0) {
-                error.title = "Servern går ej att nå";
-                error.message = "Kontrollera att du är ansluten till Internet. Om problemet kvarstår, kontakta administratör.";
-                errorAction = new errorActions.Page(error);
-            }
-            else if (err.status == 401)
-                errorAction = new errorActions.Logout(error);
-            else if (err.status == 404)
-                errorAction = new errorActions.Dialog(error);
-            else if (err.status == 500) {
-                error.title = "Ett fel inträffade på servern";
-                error.message = "Om problemet kvarstår, kontakta administratör"
-                errorAction = new errorActions.Dialog(error);
+            if (err.status in this._handledErrors) {
+                let errorHandling = this._handledErrors[err.status];
+
+                let error = new Error();
+                error.title = errorHandling.title;
+                error.message = errorHandling.message;
+
+                if (errorHandling.handling == 'page')
+                    errorAction = new errorActions.Page(error);
+                else if (errorHandling.handling == 'dialog')
+                    errorAction = new errorActions.Dialog(error);
             }
             else {
                 specificErrorAction.payload = error.message;

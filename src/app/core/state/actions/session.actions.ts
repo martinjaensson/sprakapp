@@ -16,6 +16,7 @@ export const ActionTypes = {
     LOGIN:                      type('[Session] LOGIN'),
     LOGIN_SUCCESS:              type('[Session] LOGIN_SUCCESS'),
     LOGIN_ERROR:                type('[Session] LOGIN_ERROR'),
+    LOGIN_SUCCESS_HANDLED:      type('[Session] LOGIN_SUCCESS_HANDLED'),
 
     LOGOUT:                     type('[Session] LOGOUT'),
 };
@@ -59,6 +60,8 @@ export class Login implements Action {
 
 export class LoginSuccess implements Action {
     type = ActionTypes.LOGIN_SUCCESS;
+
+    constructor(public payload: string) {}
 }
 
 export class LoginError implements Action {

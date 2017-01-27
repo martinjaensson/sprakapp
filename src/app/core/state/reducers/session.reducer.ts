@@ -38,6 +38,12 @@ export function reducer(state: SessionState = initialState, action: Action): Ses
             });
         }
 
+        case sessionActions.ActionTypes.LOGIN_SUCCESS: {
+            return Object.assign({}, state, {
+                initialized: false
+            });
+        }
+
         case sessionActions.ActionTypes.LOGIN_ERROR: {
             return Object.assign({}, state, {
                 loginError: action.payload

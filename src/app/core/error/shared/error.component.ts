@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Error } from '../../core/models';
+import { Error } from '../../../core/models';
 
 @Component({
     selector: 'ex-error',

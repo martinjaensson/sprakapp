@@ -1,5 +1,5 @@
 import { Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { ApiResponse, ApiError } from '../models';
 
@@ -18,7 +18,7 @@ export abstract class ApiResource {
             return apiResponse.data;
     }
 
-    protected mapError(err: any, caught: any): Observable<ApiError> {
+    protected mapError(err: any, caught: any): any {
         let error: ApiError;
 
         if (err.error) {

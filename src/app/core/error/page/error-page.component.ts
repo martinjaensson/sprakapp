@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ErrorService } from '../../core/services';
-import { Error } from '../../core/models';
+import { ErrorService } from '../../../core/services';
+import { Error } from '../../../core/models';
 
 @Component({
     selector: 'ex-error-page',

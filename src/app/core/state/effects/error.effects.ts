@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Rx';
 
-import { ErrorDialogComponent } from '../../../error/dialog/error-dialog.component';
+import { ErrorDialogComponent } from '../../error/dialog/error-dialog.component';
 
 import { BaseEffects } from './base.effects';
 import { AppState } from '../';

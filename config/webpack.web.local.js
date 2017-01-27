@@ -8,8 +8,6 @@ const helpers = require('./helpers');
 
 const config = require('./app.config');
 
-console.log(config.local);
-
 module.exports = webpackMerge(sharedConfig, {  
     
     output: {

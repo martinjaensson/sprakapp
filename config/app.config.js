@@ -14,9 +14,9 @@ var common = {
 module.exports = {
     local: Object.assign({}, common, {
         production: false,
-        api: {
+        api: Object.assign({}, common.api, {
             url: 'http://localhost:49887'
-        }
+        })
     }),
     dev: Object.assign({}, common, {
         production: false

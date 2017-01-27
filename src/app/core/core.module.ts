@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { SharedModule } from '../shared';
-import { ErrorModule } from '../error';
+import { ErrorModule } from './error';
 
 import { GUARDS } from './guards';
 import { SERVICES } from './services';

@@ -39,4 +39,13 @@ export class ErrorEffects extends BaseEffects {
         .do(action => this._mdDialog.open(ErrorDialogComponent, { width: '350px' }))
         .map(action => new errorActions.Handled());
 
+    /**
+     * Handles error by logging user out and showing a message
+     */
+    @Effect()
+    handleWithLogout$: Observable<Action> = this._actions$
+        .ofType(errorActions.ActionTypes.LOGOUT)
+        .do(action => this._router.navigate([ '/login' ]))
+        .map(action => new errorActions.Handled());
+
 }

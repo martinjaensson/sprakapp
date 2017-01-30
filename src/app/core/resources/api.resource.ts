@@ -31,8 +31,9 @@ export abstract class ApiResource {
             }
             catch (e) {
                 error = new ApiError();
-                error.status = 0;
+                error.errorCode = 0;
                 error.message = 'Unknown error';
+                error.status = err.status;
             }
         }
 

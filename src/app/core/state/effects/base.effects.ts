@@ -43,8 +43,6 @@ export class BaseEffects {
     handleError(specificErrorAction: Action): (err: any, caught: Observable<any>) => Observable<Action> {
         return (e: any, caught: Observable<any>) => {
 
-            console.error(e);
-
             // Cast to ApiError
             let err: ApiError = <ApiError>e;
 
@@ -66,11 +64,15 @@ export class BaseEffects {
                     errorAction = new errorActions.Page(error);
                 else if (errorHandling.handling == 'dialog')
                     errorAction = new errorActions.Dialog(error);
+                else if (errorHandling.handling == 'logout')
+                    errorAction = new errorActions.Logout(error);
             }
             else {
                 specificErrorAction.payload = error.message;
                 errorAction = specificErrorAction;
             }
+
+            console.error(e);
 
             return Observable.of(errorAction);
         }

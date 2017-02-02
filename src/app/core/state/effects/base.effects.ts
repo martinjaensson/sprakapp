@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { AppState } from '../';
-import { ApiError, Error } from '../../models';
+import { Error } from '../../models';
 
 import * as errorActions from '../actions/error.actions';
 
@@ -42,39 +42,43 @@ export class BaseEffects {
      */
     handleError(specificErrorAction: Action): (err: any, caught: Observable<any>) => Observable<Action> {
         return (e: any, caught: Observable<any>) => {
+            // Cast to Error model
+            let error = <Error>e;
 
-            // Cast to ApiError
-            let err: ApiError = <ApiError>e;
+            // Log error to console
+            console.error(error);
 
-            // Translate to error model
-            let error = new Error();
-            error.message = err.message;
+            // Create error actions
+            let errorActions: Action[] = [];
 
-            // Map to handling action
-            let errorAction: Action;
+            let generalErrorAction = this._handleGeneralError(error);
+            if (generalErrorAction)
+                errorActions.push(generalErrorAction);
+            
+            specificErrorAction.payload = error.message;
+            errorActions.push(specificErrorAction);
 
-            if (err.status in this._handledErrors) {
-                let errorHandling = this._handledErrors[err.status];
-
-                let error = new Error();
-                error.title = errorHandling.title;
-                error.message = errorHandling.message;
-
-                if (errorHandling.handling == 'page')
-                    errorAction = new errorActions.Page(error);
-                else if (errorHandling.handling == 'dialog')
-                    errorAction = new errorActions.Dialog(error);
-                else if (errorHandling.handling == 'logout')
-                    errorAction = new errorActions.Logout(error);
-            }
-            else {
-                specificErrorAction.payload = error.message;
-                errorAction = specificErrorAction;
-            }
-
-            console.error(e);
-
-            return Observable.of(errorAction);
+            return Observable.from(errorActions);
         }
+    }
+
+    private _handleGeneralError(error: Error): Action {
+        if (!(error.status in this._handledErrors)) 
+            return null;
+
+        let errorAction: Action;
+        let errorHandling = this._handledErrors[error.status];
+
+        error.title = errorHandling.title;
+        error.message = errorHandling.message;
+
+        if (errorHandling.handling == 'page')
+            errorAction = new errorActions.Page(error);
+        else if (errorHandling.handling == 'dialog')
+            errorAction = new errorActions.Dialog(error);
+        else if (errorHandling.handling == 'logout')
+            errorAction = new errorActions.Logout(error);
+
+        return errorAction;
     }
 }

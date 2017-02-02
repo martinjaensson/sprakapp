@@ -1,7 +1,7 @@
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { ApiResponse, ApiError } from '../models';
+import { ApiResponse, ApiError, Error } from '../models';
 
 /**
  * Abstract root class for all Api resources. Contains
@@ -19,25 +19,35 @@ export abstract class ApiResource {
     }
 
     protected mapError(err: any, caught: any): any {
-        let error: ApiError;
+        let error: Error = new Error();
+        error.status = err.status;
+
+        let apiError = ApiResource.tryParseApiError(err);
+        if (apiError) {
+            error.message = apiError.message;
+        }   
+        else {
+            error.message = "Unknown error"; 
+        }     
+
+        return Observable.throw(error);
+    }
+
+
+    static tryParseApiError(err: any): ApiError {
+        let apiError: ApiError;
 
         if (err.error) {
-            error = err.error;
+            return err.error;
         }
         else {
             try {
-                error = err._body ? JSON.parse(err._body) : null;
-                error.status = err.status;
+                return err._body ? JSON.parse(err._body) : null;
             }
-            catch (e) {
-                error = new ApiError();
-                error.errorCode = 0;
-                error.message = 'Unknown error';
-                error.status = err.status;
-            }
+            catch (e) { }
         }
 
-        return Observable.throw(error);
+        return null;
     }
 
 }

@@ -44,7 +44,7 @@
     "@types/jasmine": "^2.5.35",
     "@types/node": "^6.0.45",
     "angular2-router-loader": "^0.3.4",
-    "angular2-template-loader": "^0.6.0",
+    "angular2-template-loader": "0.6.0",
     "awesome-typescript-loader": "^3.0.0-beta.18",
     "bootstrap": "^4.0.0-alpha.6",
     "clean-webpack-plugin": "^0.1.9",

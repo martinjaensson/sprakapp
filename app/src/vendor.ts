@@ -16,3 +16,6 @@ import 'rxjs';
 // Ngrx
 import '@ngrx/core';
 import '@ngrx/store';
+
+// Needed by material
+import 'hammerjs';

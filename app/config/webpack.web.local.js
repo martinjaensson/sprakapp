@@ -13,8 +13,6 @@ module.exports = webpackMerge(sharedConfig, {
     output: {
         sourceMapFilename: '[name].map'
     },
-    
-    debug: true,
 
     cache: true,
     
@@ -33,7 +31,6 @@ module.exports = webpackMerge(sharedConfig, {
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
-        },
-        outputPath: helpers.root('dist')
+        }
     }
 });

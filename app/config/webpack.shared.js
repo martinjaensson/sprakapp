@@ -13,7 +13,7 @@ const helpers = require('./helpers');
  * General configuration used for all webpack builds
  */
 module.exports = {
-    
+
     // Entry points
     entry: {
         'polyfills': './src/polyfills.ts',
@@ -21,19 +21,20 @@ module.exports = {
         'app': './src/main.ts',
         'styles': './src/styles.ts'
     },
-    
+
     resolve: {
-        root: helpers.root('src'),
-        extensions: ['', '.js', '.ts'],
-        modulesDirectories: [
+        modules: [
+            helpers.root('src'),
             'node_modules'
-        ]
+        ],
+        extensions: ['.js', '.ts'],
     },
 
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.js$/,
+                enforce: 'pre',
                 loader: 'source-map-loader',
                 exclude: [
                     // these packages have problems with their sourcemaps
@@ -42,40 +43,53 @@ module.exports = {
                     helpers.root('node_modules/systemjs'),
                     helpers.root('node_modules/@ngrx')
                 ]
-            }
-
-        ],
-        loaders: [
+            },
             {
                 test: /\.(scss|css)$/,
-                include: [ 
+                include: [
                     helpers.root('src', 'assets', 'stylesheets'),
                     helpers.root('node_modules')
                 ],
-                loader: ExtractTextPlugin.extract('style', 'raw!sass')
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'raw-loader!sass-loader'
+                })
             },
             {
                 test: /\.scss$/,
                 exclude: helpers.root('src', 'assets', 'stylesheets'),
-                loaders: ["raw", "sass"]
+                use: [
+                    {
+                        loader: 'raw-loader'
+                    },
+                    {
+                        loader: 'sass-loader'
+                    },
+                ]
             },
             {
                 test: /\.ts$/,
-                loaders: [ 'awesome-typescript-loader', 'angular2-router-loader', 'angular2-template-loader' ],
-                exclude: [/\.(spec|e2e)\.ts$/]
+                exclude: [/\.(spec|e2e)\.ts$/],
+                use: [
+                    {
+                        loader: 'awesome-typescript-loader'
+                    },
+                    {
+                        loader: 'angular2-router-loader'
+                    },
+                    {
+                        loader: 'angular2-template-loader'
+                    }
+                ]
             },
             {
                 test: /\.html$/,
-                loader: 'raw',
+                loader: 'raw-loader',
             },
             {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
                 loader: 'file?name=assets/[name].[hash].[ext]'
             },
-            {
-                test: /\.json$/,
-                loader: 'json'
-            }
         ]
     },
     plugins: [
@@ -94,22 +108,30 @@ module.exports = {
                 to: 'assets/fonts'
             }
         ]),
-        
+
         // Extract global css to file
-        new ExtractTextPlugin('assets/stylesheets/[name].css', {
+         new ExtractTextPlugin({
+            filename: 'assets/stylesheets/[name].css', 
             allChunks: false
         }),
-        
+
         // Optimizes something?
         new webpack.optimize.CommonsChunkPlugin({
             name: ['polyfills', 'vendor'].reverse()
         }),
-        
+
         // Generate index.html
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'src/index.ejs',
-        })
+        }),
+        // Suppresses some error
+        new webpack.ContextReplacementPlugin(
+            // The (\\|\/) piece accounts for path separators in *nix and Windows
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            helpers.root('./src'), // location of your src
+            {} // a map of your routes
+        )
     ],
     node: {
         fs: "empty"

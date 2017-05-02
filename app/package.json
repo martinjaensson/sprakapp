@@ -10,6 +10,7 @@
     "build:app.dev.android": "webpack --config ./config/webpack.app.dev.js --progress --platform android && cordova run android",
     "build:app.prod.android": "webpack --config ./config/webpack.app.prod.js --progress --platform android && cordova build android --release",
     "build:web.local": "webpack --config ./config/webpack.web.local.js --progress",
+    "build:web.local.aot": "webpack --config ./config/webpack.web.local.aot.js --progress",
     "build:web.prod": "webpack --config ./config/webpack.web.prod.js --progress",
     "serve:web.local": "webpack-dev-server --config ./config/webpack.web.local.js --progress --inline --hot",
     "serve:web.prod": "http-server dist --cors",
@@ -46,6 +47,7 @@
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "4.0.3",
     "@ngrx/store-devtools": "3.2.3",
     "@ngtools/webpack": "1.2.11",
     "@types/cordova": "0.0.34",
@@ -86,6 +88,7 @@
     "sass-loader": "6.0.2",
     "source-map-loader": "0.1.5",
     "style-loader": "0.13.2",
+    "tslint": "^5.0.0",
     "typescript": "2.1.6",
     "url-loader": "0.5.8",
     "webpack": "2.2.1",

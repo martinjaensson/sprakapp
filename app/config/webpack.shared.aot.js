@@ -9,6 +9,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // Helper methods
 const helpers = require('./helpers');
 
+// AotPlugin
+const ngtools = require('@ngtools/webpack');
+
 /**
  * General configuration used for all webpack builds
  */
@@ -23,7 +26,7 @@ module.exports = {
     },
 
     resolve: {
-        modules: [
+        modules:[
             helpers.root('src'),
             'node_modules'
         ],
@@ -48,51 +51,25 @@ module.exports = {
                 test: /\.(scss|css)$/,
                 include: [
                     helpers.root('src', 'assets', 'stylesheets'),
-                    helpers.root('node_modules')
+                    // helpers.root('node_modules')
                 ],
                 use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
+                    fallback: 'style-loader', 
                     use: 'raw-loader!sass-loader'
                 })
             },
-            {
-                test: /\.scss$/,
-                exclude: helpers.root('src', 'assets', 'stylesheets'),
-                use: [
-                    {
-                        loader: 'raw-loader'
-                    },
-                    {
-                        loader: 'sass-loader'
-                    },
-                ]
-            },
-            {
-                test: /\.ts$/,
-                exclude: [/\.(spec|e2e)\.ts$/],
-                use: [
-                    {
-                        loader: 'awesome-typescript-loader'
-                    },
-                    {
-                        loader: 'angular2-router-loader'
-                    },
-                    {
-                        loader: 'angular2-template-loader'
-                    }
-                ]
-            },
-            {
-                test: /\.html$/,
-                loader: 'raw-loader',
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'file?name=assets/[name].[hash].[ext]'
-            },
+            { test: /\.scss$/, exclude: helpers.root('src', 'assets', 'stylesheets'), loaders: [ 'raw-loader', 'sass-loader' ] },
+            { test: /\.html$/, loader: 'raw-loader' },
+            { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loader: '@ngtools/webpack' },
+            { test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=assets/[name].[hash].[ext]' },
         ]
     },
     plugins: [
+        new ngtools.AotPlugin({
+            tsConfigPath: './tsconfig.aot.json',
+            entryModule: 'src/app/app.module#AppModule'
+        }),
+
         // Copy assets
         new CopyWebpackPlugin([
             {
@@ -110,7 +87,7 @@ module.exports = {
         ]),
 
         // Extract global css to file
-         new ExtractTextPlugin({
+        new ExtractTextPlugin({
             filename: 'assets/stylesheets/[name].css', 
             allChunks: false
         }),
@@ -125,6 +102,7 @@ module.exports = {
             filename: 'index.html',
             template: 'src/index.ejs',
         }),
+        
         // Suppresses some error
         new webpack.ContextReplacementPlugin(
             // The (\\|\/) piece accounts for path separators in *nix and Windows

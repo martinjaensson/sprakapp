@@ -45,15 +45,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="Visma.BusinessModel, Version=10.12.0.0, Culture=neutral, PublicKeyToken=302cf25cc8856685, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\11\Visma.BusinessModel.dll</HintPath>
+      <HintPath>Lib\10\Visma.BusinessModel.dll</HintPath>
     </Reference>
     <Reference Include="Visma.BusinessModel.Meta, Version=10.12.0.0, Culture=neutral, PublicKeyToken=302cf25cc8856685, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\11\Visma.BusinessModel.Meta.dll</HintPath>
+      <HintPath>Lib\10\Visma.BusinessModel.Meta.dll</HintPath>
     </Reference>
     <Reference Include="Visma.BusinessServices.Client, Version=10.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\11\Visma.BusinessServices.Client.dll</HintPath>
+      <HintPath>Lib\10\Visma.BusinessServices.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

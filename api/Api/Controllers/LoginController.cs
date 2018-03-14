@@ -42,5 +42,11 @@ namespace Api.Controllers
                 return msg;
             }
         }
+
+        [Route("Test")]
+        public async Task<HttpResponseMessage> GetTest()
+        {
+              return Request.CreateResponse(ApiResponse.Create(false));
+        }
     }
 }

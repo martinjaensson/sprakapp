@@ -32,4 +32,8 @@ export class SessionService {
             .filter(sessionState => !!sessionState.initialized)
             .map(sessionState => !!sessionState.user);
     }
+
+    logout(){
+        this._store.dispatch(new sessionActions.Logout());
+    }
 }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Service.Entities;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace Service.Database
 {
@@ -24,6 +26,7 @@ namespace Service.Database
         // This is needed to ensure that the provider DLL is included for other projects referencing this assembly.
         public bool InstanceExists => System.Data.Entity.SqlServer.SqlProviderServices.Instance != null;
 
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

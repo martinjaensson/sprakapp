@@ -35,7 +35,7 @@ export class SessionEffects extends BaseEffects {
     initialize$: Observable<Action> = this._actions$
         .ofType(sessionActions.ActionTypes.INITIALIZE)
         .map(action => {
-            if (localStorage.getItem(CONFIG.api.tokenName))
+            if (localStorage.getItem(CONFIG.tokenName))
                 return new sessionActions.Set();
             else
                 return new sessionActions.SetNull();
@@ -80,8 +80,16 @@ export class SessionEffects extends BaseEffects {
     handleLoginSuccess$: Observable<Action> = this._actions$
         .ofType(sessionActions.ActionTypes.LOGIN_SUCCESS)
         .map(toPayload)
-        .do(token => localStorage.setItem(CONFIG.api.tokenName, token))
+        .do(token => localStorage.setItem(CONFIG.tokenName, token))
         .do(token => this._router.navigate(['/']))
         .map(action => new sessionActions.Set());
+
+    @Effect()
+    logout$: Observable<Action> = this._actions$
+        .ofType(sessionActions.ActionTypes.LOGOUT)
+        .do(action => localStorage.removeItem(CONFIG.tokenName))
+        .do(action => this._router.navigate([ '/login' ]))
+        .do(action => window.location.reload())
+        .map(action => new sessionActions.LogoutOK());
 
 }

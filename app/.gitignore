@@ -1,8 +1,4 @@
 node_modules
-dist
 .vscode
 .DS_Store
 **/*.log
-.force
-e2e/*.js
-e2e/*.js.map

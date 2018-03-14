@@ -16,7 +16,7 @@ export class LoginResource extends ApiResource {
     }
 
     login(loginRequest: LoginRequest): Observable<LoginResponse> {
-        return this._http.post(`${CONFIG.api.url}/login`, JSON.stringify(loginRequest))
+        return this._http.post(`${CONFIG.api_url}/login`, JSON.stringify(loginRequest))
             .map(res => super.mapResponse<LoginResponse>(res))
             .catch(super.mapError);
     }

@@ -19,6 +19,7 @@ export const ActionTypes = {
     LOGIN_SUCCESS_HANDLED:      type('[Session] LOGIN_SUCCESS_HANDLED'),
 
     LOGOUT:                     type('[Session] LOGOUT'),
+    LOGOUT_OK:                  type('[Session] LOGOUT_OK'),
 };
 
 /**
@@ -73,5 +74,9 @@ export class LoginError implements Action {
  */
 export class Logout implements Action {
     type = ActionTypes.LOGOUT;
+}
+
+export class LogoutOK implements Action {
+    type = ActionTypes.LOGOUT_OK;
 }
 

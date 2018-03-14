@@ -1,4 +1,26 @@
-<md-sidenav-layout fullscreen>
-    <ex-navbar></ex-navbar>
-    <router-outlet></router-outlet>
-</md-sidenav-layout>
+<div class="fullScreen" [@sideNav]='state'>
+    <div class="sidenav" [@sideNav]='state'>
+        <img class="logo" [src]="logo" />
+        <div class="userInfo">
+            <md-icon>account_circle</md-icon>
+            <div class="userName">
+                <strong>{{ (user$ | async).name }}</strong><br>
+            </div>
+        </div>
+        <button md-button (click)="toggleSidenav()" routerLink=""><md-icon>dashboard</md-icon>Översikt</button>
+        <button md-button (click)="toggleSidenav()" routerLink="/delprojektoversikt"><i class="fa fa-clipboard fa-lg" aria-hidden="true"></i>Projekt</button>
+        <button md-button (click)="toggleSidenav()" routerLink="/tidsregistering"><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>Tidsregistering</button>
+        <button md-button (click)="toggleSidenav()" routerLink="/attestering"><i class="fa fa-check-circle fa-lg" aria-hidden="true"></i>Attestera</button>
+        <button class="logoutBtn" md-button (click)="logout()"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>Logga ut</button>
+    </div>
+    <div class="sideNavContainer" (click)="hideSidenav()" fullscreen>
+        <div class="toolbar">
+            <button md-icon-button mdTooltip="Meny" mdTooltipPosition="below" (click)="toggleSidenav()">
+                <md-icon>menu</md-icon>
+            </button>
+        </div>
+        <div class="contentContainer">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

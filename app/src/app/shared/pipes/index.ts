@@ -1,6 +1,5 @@
-/**
- * Pipes that are shared between multiple modules
- */
-export const PIPES: any[] = [
+import { RoundPipe } from './round.pipe';
 
+export const PIPES: any[] = [
+    RoundPipe
 ];

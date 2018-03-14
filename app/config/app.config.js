@@ -1,30 +1,16 @@
-/**
- * Configuration for webpack build.
- * 
- * These exports should follow the interface placed in src/config.ts.
- */
+exports.LOCAL = Object.assign({}, {
+    api_url: "http://localhost:49887/",
+    tokenRefreshInterval: 900000, // 15 min
+    prodMode: false,
+    dateFormat: 'YYYY-MM-DD HH:mm',
+    tokenName: 'ex-token'
+});
 
-var common = {
-    version: '0.1.0',
-    api: {
-        tokenName: 'ex-token'
-    }
-};
+exports.PROD = Object.assign({}, {
+    api_url: "https://plleagueapi.azurewebsites.net/",
+    tokenRefreshInterval: 9000000, 
+    prodMode: true,
+    dateFormat: 'YYYY-MM-DD HH:mm',
+    tokenName: 'ex-token'
+});
 
-module.exports = {
-    local: Object.assign({}, common, {
-        production: false,
-        api: Object.assign({}, common.api, {
-            url: 'http://localhost:49887'
-        })
-    }),
-    dev: Object.assign({}, common, {
-        production: false
-    }),
-    test: Object.assign({}, common, {
-        production: true
-    }),
-    prod: Object.assign({}, common, {
-        production: true
-    }),
-};

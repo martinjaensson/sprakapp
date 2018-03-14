@@ -16,7 +16,7 @@ export class UserResource extends ApiResource {
     }
 
     getAuthenticated(): Observable<User> {
-        return this._http.get(`${CONFIG.api.url}/user/authenticated`)
+        return this._http.get(`${CONFIG.api_url}/user/authenticated`)
             .map(res => super.mapResponse<User>(res))
             .catch(super.mapError);
     }

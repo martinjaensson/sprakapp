@@ -1,6 +1,6 @@
 import { RouterModule, PreloadAllModules } from '@angular/router';
 
-export const AppRoutes = RouterModule.forRoot(
+export const AppRoutes = 
     [
         { 
             path: 'login', 
@@ -10,7 +10,4 @@ export const AppRoutes = RouterModule.forRoot(
             path: '', 
             loadChildren: './private/private.module#PrivateModule'
         }
-    ], {
-        preloadingStrategy: PreloadAllModules
-    }
-);
+    ];

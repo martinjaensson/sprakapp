@@ -1,0 +1,19 @@
+ <div class="initPlaceholderContainer">
+    <div *ngIf="initPlaceholder">{{ placeholder }}</div>
+</div> 
+<md-input-container>
+    <input type="text" [id]="placeholder" mdInput 
+        [formControl]="control" 
+        [mdAutocomplete]="auto" 
+        [placeholder]="localPlaceholder"
+        (blur)="resetSearch()"
+        (click)="setPlaceholders()">
+</md-input-container>
+ <div class="arrowContainer"> 
+    <md-icon>arrow_drop_down</md-icon>
+ </div>
+<md-autocomplete #auto="mdAutocomplete" [displayWith]="displayWith">
+    <md-option *ngFor="let value of filteredSelectList$ | async" [value]="value">
+        {{ value.displayName }}
+    </md-option>
+</md-autocomplete>

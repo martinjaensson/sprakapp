@@ -2,9 +2,9 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CdkTableModule } from '@angular/cdk';
 
 import { COMPONENTS } from './components';
-import { DIRECTIVES } from './directives';
 import { PIPES } from './pipes';
 
 import { 
@@ -23,6 +23,8 @@ import {
     MdSnackBarModule,
     MdSlideToggleModule,
     MdSelectModule,
+    MdDatepickerModule,
+    MdNativeDateModule
 } from '@angular/material';
 
 export const SHARED_MATERIAL_COMPONENTS = [ 
@@ -41,11 +43,13 @@ export const SHARED_MATERIAL_COMPONENTS = [
     MdSnackBarModule,
     MdSlideToggleModule,
     MdSelectModule,
+    MdDatepickerModule,
+    MdNativeDateModule
 ];
 
-export const SHARED_MATERIAL_COMPONENTS_ROOT: any[] = [];
-for (let i = 0; i < SHARED_MATERIAL_COMPONENTS.length; i ++)
-    SHARED_MATERIAL_COMPONENTS_ROOT.push(SHARED_MATERIAL_COMPONENTS[i].forRoot());
+// export const SHARED_MATERIAL_COMPONENTS_ROOT: any[] = [];
+// for (let i = 0; i < SHARED_MATERIAL_COMPONENTS.length; i ++)
+//     SHARED_MATERIAL_COMPONENTS_ROOT.push(SHARED_MATERIAL_COMPONENTS[i].forRoot());
 
 /**
  * Contains all shared stuff for the application. This module
@@ -57,7 +61,8 @@ for (let i = 0; i < SHARED_MATERIAL_COMPONENTS.length; i ++)
         FormsModule,
         ReactiveFormsModule,
 
-        ...SHARED_MATERIAL_COMPONENTS_ROOT
+
+        ...SHARED_MATERIAL_COMPONENTS
     ],
     exports: [
         CommonModule,
@@ -67,12 +72,10 @@ for (let i = 0; i < SHARED_MATERIAL_COMPONENTS.length; i ++)
         ...SHARED_MATERIAL_COMPONENTS,
 
         ...COMPONENTS,
-        ...DIRECTIVES,
         ...PIPES
     ],
     declarations: [
         ...COMPONENTS,
-        ...DIRECTIVES,
         ...PIPES,
     ]
 })

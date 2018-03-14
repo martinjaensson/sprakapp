@@ -6,6 +6,7 @@ using Service.Database;
 
 namespace Service.Services
 {
+    //Fredrik pillar runt lite
     public class BaseService : IDisposable
     {
         public BaseService(IIdentity authenticatedUser)

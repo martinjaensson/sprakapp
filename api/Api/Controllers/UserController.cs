@@ -49,5 +49,15 @@ namespace Api.Controllers
                     return Request.CreateResponse(HttpStatusCode.OK, ApiResponse.Create(result));
             }
         }
+
+        [Route("User")]
+        public async Task<HttpResponseMessage> GetUsers()
+        {
+            using (var service = new UserService(RequestContext.Principal.Identity))
+            {
+                var users = await service.getUsers();
+                return Request.CreateResponse(ApiResponse.Create(users));
+            }
+        }
     }
 }

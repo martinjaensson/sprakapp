@@ -1,0 +1,23 @@
+section {
+    display: flex;
+    .column {
+        flex-grow: 1;
+        margin-left: 10px;
+        margin-right: 10px;
+        .btnContainer {
+            margin-top: 10px;
+            border: dotted 1px #999999;
+            button {
+                width: 100%;
+                text-align: left;
+                height: 100px;
+                padding-left:40%;
+                color: #444444;
+                font-size: 1.2em;
+                .fa {
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}

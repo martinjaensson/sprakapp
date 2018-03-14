@@ -1,10 +1,22 @@
-$ex-primary:                    #CA005D;
-$ex-primary-text:               white;
+$ex-primary:                    #005f9a;
+$ex-primary-text:               black;
 
-$ex-secondary:                  #3d3c3c;
-$ex-secondary-text:             white;
+$ex-secondary:                  #F2F2F2;
+$ex-secondary-light:            #F2F2F2;
+
+$ex-secondary-text:             black;
 
 $ex-spacing:                    20px;
 
 // Bootstrap variables
 $link-color:                    $ex-secondary;
+
+
+$dark-primary-color : #004C8C; 
+$default-primary-color: #0277BD; 
+$light-primary-color:   #a8e0ff;
+$text-primary-color: #FFFFFF;
+$accent-color: #005f9a; 
+$primary-text-color: #212121; 
+$secondary-text-color: #757575; 
+$divider-color: #BDBDBD;

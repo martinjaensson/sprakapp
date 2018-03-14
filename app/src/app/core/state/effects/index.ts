@@ -5,6 +5,5 @@ import { SessionEffects } from './session.effects';
 
 export const EFFECTS = [
     EffectsModule.runAfterBootstrap(ErrorEffects),
-
     EffectsModule.run(SessionEffects)
 ];

@@ -31,7 +31,7 @@ namespace Api.Controllers
             if (loginResult == null)
                 return Request.CreateResponse(HttpStatusCode.OK, new ApiResponse
                 {
-                    Error = new ApiError { Message = "Invalid credentials" }
+                    Error = new ApiError { Message = "Felaktigt lösenord eller användarnamn" }
                 });
             else
             {

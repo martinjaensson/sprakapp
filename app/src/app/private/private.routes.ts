@@ -15,7 +15,7 @@ export const PrivateRoutes = RouterModule.forChild(
             children: [
                 {
                     path: '',
-                    loadChildren: './dashboard/dashboard.module#DashboardModule'
+                    loadChildren: './overview/overview.module#OverviewModule'
                 }
             ]
         }

@@ -43,6 +43,8 @@ namespace Common
 
         public static int VbCompanyNumber => int.Parse(ConfigurationManager.AppSettings["VB_COMPANY_NUMBER"]);
 
+        public static string VbFilePath => ConfigurationManager.AppSettings["VB_FILE_PATH"];
+
         #endregion
 
     }

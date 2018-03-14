@@ -1,3 +1,5 @@
+
 export class User {
-    public username: string;
+    id: number;
+    name:string;
 }

@@ -18,7 +18,7 @@ export class ApiHttp extends Http {
         options = options || new BaseRequestOptions();
         options.headers = options.headers || new Headers();
         
-        var token: string = localStorage.getItem(CONFIG.api.tokenName);
+        var token: string = localStorage.getItem(CONFIG.tokenName);
         if (token && token !== 'null') 
             options.headers.append('Authorization', 'Bearer ' + token);
 

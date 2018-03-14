@@ -1,0 +1,28 @@
+.initPlaceholderContainer {
+    height: 0px;
+    width: 0px;
+    font-size: 12px;
+    color: #CCCCCC;
+    white-space: nowrap;
+}
+
+md-input-container {
+    width: 99%;
+    input {
+        width: 99%;
+    }
+}
+
+.arrowContainer {
+    display: inline-block;
+    height: 0px;
+    width: 0px;
+    md-icon {
+        width: 0px;
+        position: relative;
+        left: -25px;
+        top: 5px;
+        z-index: -100;
+        color: #CCCCCC;
+    }
+}

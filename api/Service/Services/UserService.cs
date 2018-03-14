@@ -1,4 +1,8 @@
 ﻿using Service.Dto;
+using Service.Translators;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
@@ -11,18 +15,22 @@ namespace Service.Services
 
         public async Task<UserDto> GetByUsername(string username)
         {
-            if (username == "test")
-                return new UserDto
-                {
-                    Username = "test"
-                };
+            var dbUser = await DatabaseContext.Users
+                .FirstOrDefaultAsync(u => u.Username == username);
+            return UserTranslator.Translate(dbUser);
+        }
 
-            return null;
+        public async Task<UserDto> GetByUsernameAndPassword(string username, string password)
+        {
+            var dbUser = await (DatabaseContext.Users
+                .FirstOrDefaultAsync(u => u.Username == username && u.Password == password && password != ""));
+            var user = UserTranslator.Translate(dbUser);
+            return user;
         }
 
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequest)
         {
-            var user = await GetByUsername(loginRequest.Username);
+            var user = await GetByUsernameAndPassword(loginRequest.Username, loginRequest.Password);
 
             if (user == null)
                 return null;
@@ -31,6 +39,13 @@ namespace Service.Services
             {
                 Username = user.Username
             };
+        }
+
+        public async Task<ICollection<UserDto>> getUsers()
+        {
+            var users = await DatabaseContext.Users.ToListAsync();
+
+            return users.Select(UserTranslator.Translate).ToList();
         }
     }
 }

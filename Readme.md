@@ -1,1 +1,1 @@
-Det här är en språkapp utvecklad av Martin Jaensson
+Det här är en app av Martin Jaensson

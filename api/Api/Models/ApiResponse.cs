@@ -1,36 +1,27 @@
-﻿namespace Api.Models
-{
-    /// <summary>
-    /// Response class used for all non-error results.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class ApiResponse<T>
-    {
-        public T Data { get; set; }
-    }
+﻿using Logic.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-    /// <summary>
-    /// Response class used for reporting an error.
-    /// </summary>
+namespace Api.Models
+{
     public class ApiResponse
     {
+
         public static ApiResponse<T> Create<T>(T data)
         {
-            return new ApiResponse<T> { Data = data };
-        }
-
-        public static ApiResponse CreateErrorResponse(ErrorCode errorCode, string format, params object[] args)
-        {
-            return new ApiResponse
+            return new ApiResponse<T>
             {
-                Error = new ApiError
-                {
-                    ErrorCode = errorCode,
-                    Message = string.Format(format, args)
-                }
+                Data = data
             };
         }
 
-        public ApiError Error { get; set; }
+    }
+
+    public class ApiResponse<T>
+    {
+        public T Data { get; set; }
+
     }
 }

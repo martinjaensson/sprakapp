@@ -1,0 +1,28 @@
+@import '../../../../assets/stylesheets/variables';
+
+.ex-error {
+    text-align: center;
+    width: 400px;
+    max-width: 100%;
+    font-size: 1.5rem;
+
+    h1 {
+        margin: 0;
+    }
+
+    p {
+        margin: 10px 0;
+    }
+
+    mat-icon {
+        height: 150px;
+        width: 150px;
+        font-size: 150px;
+        text-align: center;
+        color: $ex-primary;
+    }
+
+    .buttons {
+        margin-top: 50px;
+    }
+}

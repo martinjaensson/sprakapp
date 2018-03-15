@@ -1,39 +1,34 @@
-import { LOCALE_ID, NgModule, NgModuleFactoryLoader, ModuleWithProviders } from '@angular/core';
-import { DatePipe } from '@angular/common';
-
-import { AppRoutes } from './app.routes';
-import { AppComponent } from './app.component';
+import { NgModule, NgModuleFactoryLoader } from '@angular/core';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, PreloadAllModules, Router } from '@angular/router';
-
-import { CoreModule } from './core/core.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CONFIG } from "../config";
 
-let dev = [];
-if (!CONFIG.prodMode) {
-    dev = [ StoreDevtoolsModule.instrumentOnlyWithExtension() ];
-}
+import { CoreModule } from './core';
+
+import { AppComponent } from './app.component';
+import { appRoutes } from './app.routes';
+
+import { environment } from '../config';
 
 @NgModule({
-    imports: [ 
-        BrowserModule,
-        BrowserAnimationsModule,
-        CoreModule.forRoot(),
-        
-        RouterModule.forRoot(AppRoutes, {
-            preloadingStrategy: PreloadAllModules
-        }),
-        ...dev
-    ],
-    declarations: [ 
-        AppComponent, 
-    ],
-    bootstrap: [ AppComponent ],
-    providers: [
-         { provide: LOCALE_ID, useValue: "sv-SE" },
-         DatePipe,
-    ]
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+
+		CoreModule,
+
+		appRoutes,
+
+		StoreDevtoolsModule.instrument()
+	],
+	declarations: [
+		AppComponent,
+	],
+	bootstrap: [
+		AppComponent
+	],
+	providers: [
+	]
 })
 export class AppModule { }

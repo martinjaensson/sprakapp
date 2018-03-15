@@ -1,38 +1,34 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 
-const commonConfig = require('./webpack.common.js');
 const helpers = require('./helpers');
+
+const commonConfig = require('./webpack.common.js');
 const config = require('./app.config');
 
-module.exports = webpackMerge(commonConfig, {  
+module.exports = webpackMerge(commonConfig(config.local), {  
     
     output: {
-        
-        filename: '[name].[hash].bundle.js',
-
-        sourceMapFilename: '[name].[hash].bundle.map',
-
-        chunkFilename: '[name].[hash].chunk.js'
-    
+        path: helpers.root('build'),
+        filename: '[name].js',
+        sourceMapFilename: '[name].map'
     },
+
+    cache: true,
     
-    devtool: 'eval',
+    devtool: 'cheap-module-source-map',
 
     plugins: [
-        new webpack.DefinePlugin({
-            WEBPACK_CONFIG: JSON.stringify(config.LOCAL)
-        })
+
     ],
     
     devServer: {
         port: 8080,
         host: 'localhost',
-        disableHostCheck: true,
         historyApiFallback: true,
         watchOptions: {
-            aggregateTimeout: 5000,
-            ignored: /node_modules/
-        },
+            aggregateTimeout: 300,
+            poll: 1000
+        }
     }
 });

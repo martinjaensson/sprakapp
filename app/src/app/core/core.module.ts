@@ -1,44 +1,40 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared';
-import { ErrorModule } from './error';
+import { ErrorModule } from '../error';
 
-import { GUARDS } from './guards';
-import { SERVICES } from './services';
-import { RESOURCES } from './resources';
-import { Store, EFFECTS } from './state';
-import { HTTP } from './utils';
+import { coreInitializer } from './core.initializer';
+import { coreServices, AuthenticationInterceptor } from './services';
+import { coreResources } from './resources';
+import { coreStore, coreEffects } from './state';
 
 /**
  * Contains all core functionality of the application.
  * Imported by the root module.
  */
 @NgModule({
-    imports: [
-        SharedModule,
-        ErrorModule,
-        
-        HttpModule,
-        
-        ...EFFECTS
-    ],
-    exports: [],
-    declarations: [],
-    providers: [],
+	imports: [
+		HttpClientModule,
+
+		SharedModule,
+		ErrorModule,
+
+		coreStore,
+		coreEffects
+	],
+	exports: [],
+	declarations: [],
+	providers: [
+		...coreServices,
+		...coreResources,
+		coreInitializer,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthenticationInterceptor,
+			multi: true
+		}
+	],
 })
-export class CoreModule { 
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: CoreModule,
-            providers: [
-                Store,
-                
-                ...GUARDS,
-                ...SERVICES,
-                ...RESOURCES,
-                ...HTTP
-            ]
-        };
-    }
-}
+export class CoreModule { }

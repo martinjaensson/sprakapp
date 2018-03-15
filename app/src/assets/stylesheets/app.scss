@@ -1,4 +1,8 @@
-@import './_variables';
-@import './_theme';
-@import './_fonts';
-@import './_layout';
+@import 'variables';
+
+@import 'base';
+@import 'fonts';
+@import 'utils';
+
+@import 'theme/theme';
+@import 'elements/elements';

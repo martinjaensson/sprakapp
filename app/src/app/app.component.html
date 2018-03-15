@@ -1,1 +1,4 @@
+<div class="ex-loader-page" *ngIf="(initialized$ | async) === false">
+	<div class="ex-loader"></div>
+</div>
 <router-outlet></router-outlet>

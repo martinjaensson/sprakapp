@@ -1,25 +1,26 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "removeComments": false,
-        "noImplicitAny": false
-    },
-    "filesGlob": [
-        "./src/app/**/*.ts",
-        "!./node_modules/**",
-        "../../typings/main.d.ts"
-    ],
-    "awesomeTypescriptLoaderOptions": {
-        "resolveGlobs": true,
-        "forkChecker": true
-    },
-    "exclude": [
-        "**/node_modules",
-        "node_modules",
-        "bower_components"
-    ]
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"lib": [
+			"es2015",
+			"dom"
+		],
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+		"types": [
+			"jasmine",
+			"node"
+		]
+	},
+	"exclude": [
+		"./node_modules"
+	]
 }

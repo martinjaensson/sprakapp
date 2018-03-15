@@ -1,5 +1,6 @@
-import { RoundPipe } from './round.pipe';
+/**
+ * Pipes that are shared between multiple modules
+ */
+export const sharedPipes: any[] = [
 
-export const PIPES: any[] = [
-    RoundPipe
 ];

@@ -1,13 +1,9 @@
-import { SessionService } from './session.service';
-import { ErrorService } from './error.service';
+import { AuthenticationService } from './authentication.service';
 
+export { AuthenticationService } from './authentication.service';
 
-export { SessionService } from './session.service';
-export { ErrorService } from './error.service';
-
-
-
-export const SERVICES = [
-    SessionService,
-    ErrorService
+export const coreServices = [
+	AuthenticationService
 ];
+
+export { AuthenticationInterceptor } from './authentication.interceptor';

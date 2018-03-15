@@ -1,0 +1,7 @@
+<div class="ex-error" *ngIf="error">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ error.message }}</p>
+    <div class="buttons">
+        <button mat-button color="primary" (click)="dialogRef.close()">Stäng</button>
+    </div>
+</div>

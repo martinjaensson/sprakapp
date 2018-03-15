@@ -1,7 +1,8 @@
-import { SearchBoxSelectComponent } from './serach-box-select.component';
-import { PagerComponent } from './pager.component';
+import { commonComponents } from './common';
 
-export const COMPONENTS = [
-    SearchBoxSelectComponent,
-    PagerComponent
+/**
+ * Components that are shared between multiple modules
+ */
+export const sharedComponents: any[] = [
+	...commonComponents
 ];
